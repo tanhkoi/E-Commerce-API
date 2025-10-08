@@ -15,7 +15,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer {
+public class Customer extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,11 +51,8 @@ public class Customer {
     @Column(name = "phone_number", length = 20)
     private String phone_number;
 
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Instant created_at;
-
-    @LastModifiedDate
-    @Column(name = "updated_at", nullable = false)
-    private Instant updated_at;
+    @PrePersist
+    @PreUpdate
+    void normalize() {
+    }
 }
